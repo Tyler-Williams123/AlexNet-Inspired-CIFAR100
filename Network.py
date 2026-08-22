@@ -29,9 +29,32 @@ class AlexNet(nn.Module):
 
         self.softMax = nn.Softmax()
 
-
-
     def forward(self, x):
+        x = self.norm1(self.activationFuncion(self.conv1(x)))
+        x = self.pool1(x)
+
+        x = self.norm2(self.activationFuncion(self.conv2(x)))
+        x = self.pool2(x)
+
+        x = self.activationFuncion(self.conv3(x))
+
+        x = self.activationFuncion(self.conv4(x))
+
+        x = self.activationFuncion(self.conv5(x))
+        x = self.pool5(x)
+
+        x = torch.flatten(x, start_dim=1)
+
+        x = self.activationFuncion(self.linear6(x))
+        x = self.dropout(x)
+
+        x = self.activationFuncion(self.linear7(x))
+        x = self.dropout(x)
+
+        x = self.linear8(x)
+        return x
+
+    def predict(self, x):
         x = self.norm1(self.activationFuncion(self.conv1(x)))
         x = self.pool1(x)
 
@@ -56,3 +79,4 @@ class AlexNet(nn.Module):
         x = self.linear8(x)
         x = self.softMax(x)
         return x
+    
