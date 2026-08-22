@@ -3,7 +3,7 @@ import torch.nn as nn
 
 class AlexNet(nn.Module):
     def __init__(self,):
-        super.__init__()
+        super().__init__()
         self.activationFuncion = nn.ReLU()
         self.dropout = nn.Dropout(0.5)
 
@@ -25,7 +25,7 @@ class AlexNet(nn.Module):
         self.linear6 = nn.Linear(9216, 4096)
         self.linear7 = nn.Linear(4096, 4096)
 
-        self.linear8 = nn.Linear(4096, 1000)
+        self.linear8 = nn.Linear(4096, 100)
 
         self.softMax = nn.Softmax()
 
