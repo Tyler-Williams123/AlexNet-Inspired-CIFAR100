@@ -16,6 +16,4 @@ for i in range(5):
 
     data = data.to(dtype=torch.uint8)
 
-    dataset = torch.utils.data.TensorDataset(data, trainingTargets[i * 10_000 : (i + 1) * 10_000])
-
-    torch.save(dataset, f"Processed_Images_{i}.pt")
+    torch.save((data, trainingTargets[i * 10_000 : (i + 1) * 10_000]), f"Processed_Images_{i}.pt")

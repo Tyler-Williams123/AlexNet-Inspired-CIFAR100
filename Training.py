@@ -11,6 +11,7 @@ def main():
     for epoch in range(2):
         for i in range(5):
             data = torch.load(f"data/Processed_Images_{i}.pt")
+            data = torch.utils.data.TensorDataset(data)
 
             dataLoader = torch.utils.data.DataLoader(data, batch_size=128, shuffle=True, num_workers=3)
 
