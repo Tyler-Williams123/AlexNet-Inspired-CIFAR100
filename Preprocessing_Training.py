@@ -12,7 +12,7 @@ for i in range(5):
     data = data.permute(0, 3, 1, 2)
     data = data.float()
 
-    data = F.interpolate(data, (224, 224), mode="bilinear", align_corners=False)
+    data = F.interpolate(data, (227, 227), mode="bilinear", align_corners=False)
 
     data = data.to(dtype=torch.uint8)
 
