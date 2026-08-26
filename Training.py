@@ -5,12 +5,12 @@ def main():
     device = torch.device("cuda")
 
     AlexNet = Network.AlexNet().to(device)
-    optim = torch.optim.SGD(AlexNet.parameters(), lr=0.01, momentum=0.9, weight_decay=0.0005) #devide lr by 10 when the validation error rate stopps improving
+    optim = torch.optim.SGD(AlexNet.parameters(), lr=0.1, momentum=0.05, weight_decay=0.0000) #devide lr by 10 when the validation error rate stopps improving
     loss_fn = torch.nn.CrossEntropyLoss().to(device)
 
     images, targets = torch.load(f"data/Processed_Images.pt")
     data = torch.utils.data.TensorDataset(images, targets)
-    dataLoader = torch.utils.data.DataLoader(data, batch_size=128, shuffle=True, num_workers=0, pin_memory=True)
+    dataLoader = torch.utils.data.DataLoader(data, batch_size=128, shuffle=True, num_workers=0)
 
     for epoch in range(10):
         for batch, (x, y) in enumerate(dataLoader):

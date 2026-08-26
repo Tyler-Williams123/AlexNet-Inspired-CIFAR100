@@ -10,7 +10,7 @@ x, y = dataset
 
 AlexNet.eval()
 
-with torch.no_grad:
+with torch.no_grad():
     correct = (torch.argmax(AlexNet(x), dim=1) == y).sum()
 
     percentage = correct / y.shape[0]
