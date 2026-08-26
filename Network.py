@@ -6,26 +6,20 @@ class AlexNet(nn.Module):
         super().__init__()
         self.activationFuncion = nn.ReLU()
         self.dropout = nn.Dropout(0.5)
-        self.pool = nn.MaxPool2d(kernel_size=3, stride=2)
+        self.pool = nn.MaxPool2d(kernel_size=2, stride=2)
 
-        self.conv1 = nn.Conv2d(in_channels=3, out_channels=96, kernel_size=11, stride=4)
+        self.conv1 = nn.Conv2d(in_channels=3, out_channels=64, kernel_size=3, padding=1)
         self.norm1 = nn.LocalResponseNorm(size=5, alpha= 1e-4, beta=.75, k=2)
 
-        self.conv2 = nn.Conv2d(in_channels=96, out_channels=256, kernel_size=5, padding=2, groups=2)
+        self.conv2 = nn.Conv2d(in_channels=64, out_channels=128, kernel_size=3, padding=1)
         self.norm2 = nn.LocalResponseNorm(size=5, alpha=1e-4, beta=.75, k=2)
 
-        self.conv3 = nn.Conv2d(in_channels=256, out_channels=384, kernel_size=3, padding=1)
+        self.conv3 = nn.Conv2d(in_channels=128, out_channels=256, kernel_size=3)
 
-        self.conv4 = nn.Conv2d(in_channels=384, out_channels=384, kernel_size=3, groups=2, padding=1)
+        self.conv4 = nn.Conv2d(in_channels=256, out_channels=256, kernel_size=6)
 
-        self.conv5 = nn.Conv2d(in_channels=384, out_channels=256, kernel_size=3, groups=2, padding=1)
-
-        self.linear6 = nn.Linear(9216, 4096)
-        self.linear7 = nn.Linear(4096, 4096)
-
-        self.linear8 = nn.Linear(4096, 100)
-
-        self.softMax = nn.Softmax()
+        self.linear5 = nn.Linear(256, 100)
+        self.linear6 = nn.Linear(100, 100)
 
     def forward(self, x):
         x = self.norm1(self.activationFuncion(self.conv1(x)))
@@ -38,16 +32,11 @@ class AlexNet(nn.Module):
 
         x = self.activationFuncion(self.conv4(x))
 
-        x = self.activationFuncion(self.conv5(x))
-        x = self.pool(x)
-
         x = torch.flatten(x, start_dim=1)
 
-        x = self.activationFuncion(self.linear6(x))
+        x = self.activationFuncion(self.linear5(x))
         x = self.dropout(x)
 
-        x = self.activationFuncion(self.linear7(x))
-        x = self.dropout(x)
+        self.linear6(x)
 
-        x = self.linear8(x)
         return x
