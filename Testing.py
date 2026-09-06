@@ -4,7 +4,7 @@ import torch
 
 dataset = torch.load("data/Testing_Processed_Images.pt")
 AlexNet = Network.AlexNet()
-AlexNet.load_state_dict(torch.load("model.pt"))
+AlexNet.load_state_dict(torch.load("Model.pt"))
 
 x, y = dataset
 

@@ -18,8 +18,8 @@ class AlexNet(nn.Module):
 
         self.conv4 = nn.Conv2d(in_channels=256, out_channels=256, kernel_size=6)
 
-        self.linear5 = nn.Linear(256, 100)
-        self.linear6 = nn.Linear(100, 100)
+        self.linear5 = nn.Linear(256, 50)
+        self.linear6 = nn.Linear(50, 100)
 
     def forward(self, x):
         # print("input", x.abs().mean().item())
@@ -45,6 +45,6 @@ class AlexNet(nn.Module):
         x = self.dropout(x)
         # print("linear1:", x.abs().mean().item())
 
-        self.linear6(x)
+        x = self.linear6(x)
 
         return x
