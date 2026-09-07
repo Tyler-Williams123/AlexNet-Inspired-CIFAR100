@@ -9,7 +9,7 @@ class AlexNet(nn.Module):
         self.pool = nn.MaxPool2d(kernel_size=2, stride=2)
 
         self.conv1 = nn.Conv2d(in_channels=3, out_channels=64, kernel_size=3, padding=1)
-        # self.norm1 = nn.LocalResponseNorm(size=5, alpha= 1e-4, beta=.75, k=2)
+        self.norm1 = nn.LocalResponseNorm(size=5, alpha= 1e-4, beta=.75, k=2)
 
         self.conv2 = nn.Conv2d(in_channels=64, out_channels=128, kernel_size=3, padding=1)
         # self.norm2 = nn.LocalResponseNorm(size=5, alpha=1e-4, beta=.75, k=2)
@@ -18,8 +18,8 @@ class AlexNet(nn.Module):
 
         self.conv4 = nn.Conv2d(in_channels=128, out_channels=128, kernel_size=6)
 
-        self.linear5 = nn.Linear(128, 50)
-        self.linear6 = nn.Linear(50, 100)
+        self.linear5 = nn.Linear(128, 100)
+        self.linear6 = nn.Linear(100, 100)
 
     def forward(self, x):
         # print("input", x.abs().mean().item())
