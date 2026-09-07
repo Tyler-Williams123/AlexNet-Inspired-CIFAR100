@@ -14,11 +14,11 @@ class AlexNet(nn.Module):
         self.conv2 = nn.Conv2d(in_channels=64, out_channels=128, kernel_size=3, padding=1)
         # self.norm2 = nn.LocalResponseNorm(size=5, alpha=1e-4, beta=.75, k=2)
 
-        self.conv3 = nn.Conv2d(in_channels=128, out_channels=256, kernel_size=3)
+        self.conv3 = nn.Conv2d(in_channels=128, out_channels=128, kernel_size=3)
 
-        self.conv4 = nn.Conv2d(in_channels=256, out_channels=256, kernel_size=6)
+        self.conv4 = nn.Conv2d(in_channels=128, out_channels=128, kernel_size=6)
 
-        self.linear5 = nn.Linear(256, 50)
+        self.linear5 = nn.Linear(128, 50)
         self.linear6 = nn.Linear(50, 100)
 
     def forward(self, x):
