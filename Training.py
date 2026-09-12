@@ -5,7 +5,7 @@ def main():
     device = torch.device("cuda")
 
     AlexNet = Network.AlexNet().to(device)
-    AlexNet.load_state_dict(torch.load("Model.pt"))
+    # AlexNet.load_state_dict(torch.load("Model.pt"))
     optim = torch.optim.SGD(AlexNet.parameters(), lr=0.1, momentum=0.0, weight_decay=0.005) #devide lr by 10 when the validation error rate stopps improving
     loss_fn = torch.nn.CrossEntropyLoss().to(device)
 
